@@ -1,0 +1,10 @@
+Server/.DS_Store
+Server/node_modules/
+Server/dist/
+Server/npm-debug.log
+Server/yarn-error.log
+Client/.DS_Store
+Client/node_modules/
+Client/dist/
+Client/npm-debug.log
+Client/yarn-error.log

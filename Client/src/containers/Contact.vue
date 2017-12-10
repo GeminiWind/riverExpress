@@ -1,0 +1,49 @@
+<template>
+  <div id="app">
+    <div id="preloader">
+  <div id="status">&nbsp;</div>
+</div>
+<a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+<div class="container">
+  <header id="header">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="header_top">
+          <div class="header_top_left">
+            <ul class="top_nav">
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="page.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="404.html">Error Page</a></li>
+            </ul>
+          </div>
+          <div class="header_top_right">
+            <form action="#" class="search_form">
+              <input type="text" placeholder="Text to Search">
+              <input type="submit" value="">
+            </form>
+          </div>
+        </div>
+        <div class="header_bottom">
+          <div class="header_bottom_left"><a class="logo" href="../index.html">mag<strong>Express</strong> <span>A Pro Magazine Template</span></a></div>
+          <div class="header_bottom_right"><a href="#"><img src="../assets/images/addbanner_728x90_V1.jpg" alt=""></a></div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <Navigation></Navigation>
+</div>
+<MyFooter></MyFooter>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'app',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App'
+    }
+  }
+}
+</script>
