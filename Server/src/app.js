@@ -23,7 +23,7 @@ mongoose.Promise = global.Promise;
 const app = express();
 
 // CONFIGURE APPLICATION
-app.set('port', process.env.PORT || 8000);
+app.set('port', process.env.APP_PORT || 8000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true,

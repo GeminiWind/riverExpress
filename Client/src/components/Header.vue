@@ -5,8 +5,11 @@
             <div class="header_top">
               <div class="header_top_right">
                   <div class="user-info" v-if="user">
-                      Welcome {{ user.profile.first_name || 'guess' }}
+                      Welcome {{ user.profile.first_name }}
                       <a href='#' @click="logout">Logout</a>
+                  </div>
+                  <div class="login-guess" v-else>
+                    <router-link :to="{ name: 'login'}">Login</router-link>
                   </div>
                 <form action="#" class="search_form">
                   <input type="text" placeholder="Text to Search">

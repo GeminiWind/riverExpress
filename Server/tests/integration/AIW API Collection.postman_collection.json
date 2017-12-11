@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "AIW API Collection",
-		"_postman_id": "01281b0f-f5ce-acb1-5db2-2c4a47eb18c0",
+		"_postman_id": "f20a6c52-62eb-1b39-7f47-3d6dfee56afd",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -46,7 +46,10 @@
 										"description": ""
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"description": ""
 							},
 							"response": []
@@ -82,7 +85,10 @@
 										"description": ""
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"description": ""
 							},
 							"response": []
@@ -112,7 +118,10 @@
 								},
 								"method": "GET",
 								"header": [],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"description": ""
 							},
 							"response": []
@@ -148,7 +157,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -183,7 +195,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Test Title\",\n\t\"content\": \"Just content here\",\n\t\"shortIntro\": \"intro bla.... bla\",\n\t\"tags\": [\"hotgirl\", \"hotboy\"],\n\t\"category\": [\"fiction\"],\n\t\"author\": {\n\t\t\"name\": \"Gemini\",\n\t\t\"dob\": \"2017-12-07\",\n\t\t\"intro\": \"I like bread\"\n\t},\n\t\"image\": \"http://test-image.url.com\",\n\t\"popular\": true\n}"
+							"raw": "{\n\t\"title\": \"Test Title\",\n\t\"content\": \"Just content here\",\n\t\"shortIntro\": \"intro bla.... bla\",\n\t\"tags\": [\"hotgirl\", \"hotboy\"],\n\t\"category\": \"Fashion\",\n\t\"author\": {\n\t\t\"name\": \"Gemini\",\n\t\t\"dob\": \"2017-12-07\",\n\t\t\"intro\": \"I like bread\"\n\t},\n\t\"image\": \"http://test-image.url.com\",\n\t\"popular\": true\n}"
 						},
 						"description": ""
 					},
@@ -212,7 +224,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -240,7 +255,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -268,7 +286,10 @@
 								"description": ""
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []

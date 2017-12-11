@@ -11,7 +11,8 @@ const initializeRoutes = (app, passport) => {
   app.get('/user', auth, getUser);
   // Article
   app.get('/articles', articleController.index);
-  app.post('/articles', articleController.store);
+  app.post('/articles', validator.createArticleRequest, articleController.store);
+  app.get('/articles/recentComments', articleController.recentComment);
   app.get('/articles/popular', articleController.popular);
   app.get('/articles/:slug', articleController.show);
   app.put('/article/:slug', articleController.update);

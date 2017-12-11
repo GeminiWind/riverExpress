@@ -1,5 +1,6 @@
+import _ from 'lodash';
 import { validationResult } from 'express-validator/check';
-import Aritcle from '../../Models/Article';
+import Article from '../../Models/Article';
 import Comment from '../../Models/Comment';
 
 /**
@@ -45,8 +46,9 @@ const filterByAuthor = (articles, author) => {
 const index = async (req, res) => {
   let articles;
   try {
-    articles = await Aritcle.find({}).sort('-createdAt');
-    articles.forEach(async (article) => {
+    articles = await Article.find({}).sort('-createdAt');
+    _.forEach(articles, async (article) => {
+      // attach comments
       article.comments = await Comment.find({
         article: article._id,
       }).populate('user').sort('-created_at');
@@ -60,6 +62,7 @@ const index = async (req, res) => {
     if (req.query.author) {
       articles = filterByAuthor(articles, req.query.author);
     }
+
     res.ok(articles);
   } catch (error) {
     res.InternalServerError(error);
@@ -74,15 +77,37 @@ const index = async (req, res) => {
  */
 const popular = async (req, res) => {
   try {
-    const articles = await Aritcle.find({
+    const articles = await Article.find({
       popular: true,
     }).sort('-createdAt');
-    articles.forEach(async (article) => {
+    _.forEach(articles, async (article) => {
+      // attach comments
       article.comments = await Comment.find({
         article: article._id,
       }).populate('user').sort('-created_at');
     });
+
     res.ok(articles);
+  } catch (error) {
+    res.InternalServerError(error);
+  }
+};
+
+/**
+ * List recent comment articles
+ *
+ * @param {any} req
+ * @param {any} res
+ */
+const recentComment = async (req, res) => {
+  try {
+    const recentComments = await Comment.find({}).sort('-createdAt').populate('article');
+    
+    const result = recentComments.map(record => {
+      record = record.toObject();
+      return record.article;
+    });
+    res.ok(result);
   } catch (error) {
     res.InternalServerError(error);
   }
@@ -98,13 +123,15 @@ const popular = async (req, res) => {
 const show = async (req, res) => {
   const { slug } = req.params;
   try {
-    const article = await Aritcle.findOne({
+    const article = await Article.findOne({
       slug,
     });
     if (article) {
+      // attach comments on article
       article.comments = await Comment.find({
         article: article._id,
       }).populate('user').sort('-created_at');
+
       res.ok(article);
     }
   } catch (error) {
@@ -124,7 +151,7 @@ const store = async (req, res) => {
     return res.badRequest(errors.mapped());
   }
   try {
-    const article = new Aritcle();
+    const article = new Article();
     article.title = req.body.title;
     article.content = req.body.content;
     article.short_intro = req.body.shortIntro;
@@ -153,14 +180,14 @@ const update = async (req, res) => {
 };
 
 /**
- *
+ * Delete specified article
  *
  * @param {any} req
  * @param {any} res
  */
 const destroy = async (req, res) => {
   try {
-    await Aritcle.remove({
+    await Article.remove({
       slug: req.params.slug,
     });
     res.noContent();
@@ -169,4 +196,4 @@ const destroy = async (req, res) => {
   }
 };
 
-export { index, show, store, update, destroy, popular };
+export { index, show, store, update, destroy, popular, recentComment };

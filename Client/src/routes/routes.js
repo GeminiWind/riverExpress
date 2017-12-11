@@ -28,7 +28,7 @@ const router = new VueRouter({
     meta: {
       forVisitor: true
     }
-  },{
+  }, {
     path: '/',
     name: 'home',
     component: Home,
