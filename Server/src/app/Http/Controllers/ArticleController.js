@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { validationResult } from 'express-validator/check';
 import Article from '../../Models/Article';
 import Comment from '../../Models/Comment';
+import Fuse from 'fuse.js';
 
 /**
  * Filter article by specified tag
@@ -10,8 +11,22 @@ import Comment from '../../Models/Comment';
  * @param {any} articles
  * @param {any} tag
  */
-const filterByTag = (articles, tags) => {
-  const result = articles.filter(article => article.tags.includes(tags));
+const filterByTag = (articles, tag) => {
+  let options = {
+    shouldSort: true,
+    threshold: 0.2,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 4,
+    keys: [
+      "tags"
+    ]
+  };
+
+  let fuse = new Fuse(articles, options);
+  let result = fuse.search(tag);
+  
   return result;
 };
 
@@ -22,7 +37,21 @@ const filterByTag = (articles, tags) => {
  * @param {any} tag
  */
 const filterByCategory = (articles, category) => {
-  const result = articles.filter(article => (article.category === category));
+  let options = {
+    shouldSort: true,
+    threshold: 0.2,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 4,
+    keys: [
+      "category"
+    ]
+  };
+
+  let fuse = new Fuse(articles, options);
+  let result = fuse.search(category);
+
   return result;
 };
 
@@ -30,10 +59,24 @@ const filterByCategory = (articles, category) => {
  * Filter articles by author
  *
  * @param {any} articles
- * @param {any} tag
+ * @param {any} author
  */
 const filterByAuthor = (articles, author) => {
-  const result = articles.filter(article => article.author.slug === author);
+  let options = {
+    shouldSort: true,
+    threshold: 0.6,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 4,
+    keys: [
+      "author.slug",
+    ]
+  };
+
+  let fuse = new Fuse(articles, options);
+  let result = fuse.search(author);
+
   return result;
 };
 

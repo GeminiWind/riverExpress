@@ -36,11 +36,6 @@
         components: {
             Recent,
             Popular
-        },
-        data() {
-            return {
-
-            }
         }
     }
 </script>

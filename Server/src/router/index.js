@@ -12,7 +12,7 @@ const initializeRoutes = (app, passport) => {
   // Article
   app.get('/articles', articleController.index);
   app.post('/articles', validator.createArticleRequest, articleController.store);
-  app.get('/articles/recentComments', articleController.recentComment);
+  app.get('/articles/comments/recent', articleController.recentComment);
   app.get('/articles/popular', articleController.popular);
   app.get('/articles/:slug', articleController.show);
   app.put('/article/:slug', articleController.update);

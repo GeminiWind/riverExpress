@@ -4,17 +4,8 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm6">
           <slick ref="slick" :options="slickOptions">
-            <div class="single_iteam"><img src="../assets/images/550x330x1.jpg" alt="">
-              <h2><a class="slider_tittle" href="pages/single.html">Fusce eu nulla semper porttitor felis sit amet</a></h2>
-            </div>
-            <div class="single_iteam"><img src="../assets/images/550x330x2.jpg" alt="">
-              <h2><a class="slider_tittle" href="pages/single.html">Fusce eu nulla semper porttitor felis sit amet</a></h2>
-            </div>
-            <div class="single_iteam"><img src="../assets/images/550x330x3.jpg" alt="">
-              <h2><a class="slider_tittle" href="pages/single.html">Fusce eu nulla semper porttitor felis sit amet</a></h2>
-            </div>
-            <div class="single_iteam"><img src="../assets/images/550x330x4.jpg" alt="">
-              <h2><a class="slider_tittle" href="pages/single.html">Fusce eu nulla semper porttitor felis sit amet</a></h2>
+            <div class="single_iteam" v-for="popular in populars" :key="popular.slug"><img :src="popular.image" alt="">
+              <h2><router-link :to="{ name: 'article', params: { article: popular.slug }}" class="slider_tittle">{{ popular.title }}</router-link></h2>
             </div>
           </slick>
         </div>
@@ -165,16 +156,20 @@
                       <router-link :to="{ name: 'article', params: { article: games[0].slug }}">{{ games[0].title }}</router-link>
                     </h2>
                     <div class="comments_box"> <span class="meta_date">{{ games[0].created_at | moment("ddd, hA")}}</span> <span class="meta_comment"><router-link :to="{ name: 'article', params: { article: games[0].slug }}">{{ games[0].comments.length}} comments</router-link></span>                    <span class="meta_more"><router-link :to="{ name: 'article', params: { article: games[0].slug }}">Read More...</router-link></span> </div>
-                    <p>{{ games[0].short_intro | substring(93) }}</p>
+                    <p v-html="games[0].short_intro">{{ games[0].short_intro | substring(93) }}</p>
                   </li>
                 </ul>
-                <ul class="small_catg wow fadeInDown" v-for="(game,index) in games" :key="game.slug">
-                  <li v-if="index >0 && index <3">
+                <ul class="small_catg wow fadeInDown">
+                  <li v-for="(game,index) in games" :key="game.slug" v-if="index >0 && index <3">
                     <div class="media">
-                      <router-link :to="{ name: 'article', params: { article: game.slug }}" class="media-left"><img :src=game.image alt="" width="112" height="112"> </router-link>
+                      <router-link :to="{ name: 'article', params: { article: game.slug }}" class="media-left">
+                        <img :src="game.image" alt="" width="112" height="112">
+                      </router-link>
                       <div class="media-body">
                         <h4 class="media-heading">
-                          <router-link :to="{ name: 'article', params: { article: game.slug }}">{{ game.slug }} </router-link>
+                          <router-link :to="{ name: 'article', params: { article: game.slug }}">
+                            {{ game.title }}
+                          </router-link>
                         </h4>
                         <div class="comments_box"> <span class="meta_date">{{ game.created_at | moment("ddd,hA")}}</span> <span class="meta_comment"><router-link :to="{ name: 'article', params: { article: game.slug }}">{{ game.comments.length }} comments</router-link></span> </div>
                       </div>
@@ -186,7 +181,7 @@
             <div class="fashion_category">
               <div class="single_category">
                 <div class="single_category wow fadeInDown">
-                  <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a class="title_text" href="#">Fashion</a> </h2>
+                  <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <router-link :to="{ name: 'category', params: { category: 'Fashion' } }"class="title_text">Fashion</router-link></h2>
                   <ul class="fashion_catgnav wow fadeInDown">
                     <li>
                       <div class="catgimg2_container">
@@ -196,13 +191,13 @@
                         <router-link :to="{ name: 'article', params: { article: fashions[0].slug }}">{{ fashions[0].title }}</router-link>
                       </h2>
                       <div class="comments_box"> <span class="meta_date">{{ fashions[0].created_at | moment("ddd, hA") }}</span> <span class="meta_comment"><router-link :to="{ name: 'article', params: { article: fashions[0].slug }}">{{ fashions[0].comments.length }} Comments</router-link></span>                      <span class="meta_more"><router-link :to="{ name: 'article', params: { article: fashions[0].slug }}">Read More...</router-link></span> </div>
-                      <p>{{ fashions[0].short_intro | substring(93) }} </p>
+                      <p v-html="fashions[0].short_intro">{{ fashions[0].short_intro | substring(93) }} </p>
                     </li>
                   </ul>
-                  <ul class="small_catg wow fadeInDown" v-for="(fashion, index) in fashions" :key="fashion.slug">
-                    <li v-if="index >0 && index <3">
+                  <ul class="small_catg wow fadeInDown">
+                    <li v-if="index >0 && index <3" v-for="(fashion, index) in fashions" :key="fashion.slug">
                       <div class="media wow fadeInDown">
-                        <router-link :to="{ name: 'article', params: { article: fashion.slug }}" class="media-left"><img :src=fashion.image alt="" width="112px" height="112px"></router-link>
+                        <router-link :to="{ name: 'article', params: { article: fashion.slug }}" class="media-left"><img :src="fashion.image" alt="" width="112px" height="112px"></router-link>
                         <div class="media-body">
                           <h4 class="media-heading">
                             <router-link :to="{ name: 'article', params: { article: fashion.slug }}">{{ fashion.title }} </router-link>
@@ -232,14 +227,14 @@
                     </h2>
                     <div class="comments_box"> <span class="meta_date"> {{ technologies[0].created_at | moment("ddd, hA") }}</span> <span class="meta_comment"><router-link :to="{ name: 'article', params: { article: technologies[0].slug }}">{{ technologies[0].comments.length }} Comments</router-link></span>                    <span class="meta_more"><router-link :to="{ name: 'article', params: { article: technologies[0].slug }}">Read More...</router-link></span> </div>
                     <div>
-                      <p>{{ technologies[0].short_intro | substring(93) }}</p>
+                      <p v-html="technologies[0].short_intro">{{ technologies[0].short_intro | substring(93) }}</p>
                     </div>
                   </li>
                 </ul>
               </div>
               <div class="business_category_right">
-                <ul class="small_catg wow fadeInDown" v-for="(technology, index) in technologies" :key="technology.slug">
-                  <li v-if="index > 0 && index < 4">
+                <ul class="small_catg wow fadeInDown">
+                  <li v-if="index > 0 && index < 4"  v-for="(technology, index) in technologies" :key="technology.slug">
                     <div class="media wow fadeInDown">
                       <router-link :to="{ name: 'article', params: { article: technology.slug }}" class="media-left"><img :src="technology.image" alt="" width="112px" height="112px"></router-link>
                       <div class="media-body">
@@ -272,6 +267,7 @@
     name: 'home',
     data() {
       return {
+        populars: [],
         games: [],
         fashions: [],
         technologies: [],
@@ -300,12 +296,17 @@
       }
     },
     created() {
+      this.fetchPopulars();
       this.fetchGames();
       this.fetchFashions();
       this.fetchTechnologies();
       this.fetchBussinesses();
     },
     methods: {
+      async fetchPopulars() {
+          const { data } = await this.$http.get('/articles/popular');
+          this.populars = data.data.slice(0,3);
+      },
       async fetchByCategory(category) {
         try {
           const {
