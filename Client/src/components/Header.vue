@@ -11,17 +11,17 @@
                   <div class="login-guess" v-else>
                     <router-link :to="{ name: 'login'}">Login</router-link>
                   </div>
-                <form action="#" class="search_form">
-                  <input type="text" placeholder="Text to Search">
+                <form @submit.prevent="searchArticle" class="search_form">
+                  <input type="text" placeholder="Type article to search" v-model="search">
                   <input type="submit" value="">
                 </form>
               </div>
             </div>
             <div class="header_bottom">
               <div class="header_bottom_left">
-                <a class="logo" href="index.html">mag
+                <a class="logo" href="index.html">river
                   <strong>Express</strong>
-                  <span>A Pro Magazine Template</span>
+                  <span>Daily Express For You</span>
                 </a>
               </div>
             </div>
@@ -33,14 +33,26 @@
 <script>
     import { mapGetters } from 'vuex'
     export default {
+         data(){
+            return {
+                search: '',
+            }
+        },
         computed: mapGetters({
             user: 'auth/user',
         }),
         methods: {
           async logout() {
             await this.$store.dispatch('auth/logout');
-            this.$router.push('/');
+            // go back
+            window.history.length > 1
+                ? this.$router.go(-1)
+                : this.$router.push('/')
           }
+        },
+        searchArticle() {
+          // direct to search
+          // this.$router.push({})
         }
     }
 </script>

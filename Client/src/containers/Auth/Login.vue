@@ -53,7 +53,10 @@
                 try {
                     await this.$store.dispatch('auth/login', { email: this.email, password: this.password });
                     await this.$store.dispatch('auth/getProfile')
-                    this.$router.push({ path: '/'});
+                    // go back
+                    window.history.length > 1
+                        ? this.$router.go(-1)
+                        : this.$router.push('/')
                 } catch (error) {
                     this.$router.push({ path: '/500'});
                 }
