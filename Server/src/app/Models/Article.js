@@ -56,6 +56,9 @@ const articleSchema = mongoose.Schema(
     comments: {
       type: Array,
     },
+    relateds: {
+      type: Array,
+    }
   },
   {
     timestamps: {

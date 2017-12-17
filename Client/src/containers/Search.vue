@@ -80,7 +80,18 @@
         paginate: ['articles']
       }
     },
+    created () {
+      this.boot();
+    },
     methods: {
+      async boot() {
+        this.tag = (this.$route.query.tag) ? this.$route.query.tag : this.tag;
+        this.category = (this.$route.query.category) ? this.$route.query.category : this.category;
+        this.author = (this.$route.query.author) ? this.$route.query.author : this.author;
+        if (this.tag !== '' || this.category !== '' || this.author !== '') {
+          await this.search();
+        }
+      },
       async search() {
         try {
           let searchQuery = (this.tag !== '') ? `tag=${this.tag}` : '';

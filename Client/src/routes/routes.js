@@ -37,7 +37,7 @@ const router = new VueRouter({
     }
   }, {
     path: '/advanced-search',
-    name: 'adv-search',
+    name: 'search',
     component: Search,
     meta: {
       forVisitor: true

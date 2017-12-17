@@ -14,11 +14,11 @@
           </ol>
           <h2 class="post_titile">{{ article.title }}</h2>
           <div class="single_page_content">
-            <div class="post_commentbox"> <a href="#"><i class="fa fa-user" v-if="article.author.name"></i>{{ article.author.name }}</a> <span><i class="fa fa-calendar"></i>{{ article.created_at | moment("dddd, MMMM Do YYYY, h:mm a") }}</span> <router-link :to="{ name: 'category', params: { category: article.category }}"><i class="fa fa-tags"></i>{{ article.category }}</router-link>            </div>
+            <div class="post_commentbox"> <router-link :to="{name: 'search', query: { author: article.author.slug }}"><i class="fa fa-user"></i>{{ article.author.name }}</router-link><span><i class="fa fa-calendar"></i>{{ article.created_at | moment("dddd, MMMM Do YYYY, h:mm a") }}</span> <router-link :to="{ name: 'category', params: { category: article.category }}"><i class="fa fa-tags"></i>{{ article.category }}</router-link>            </div>
             <img class="img-center" :src="article.image" alt="">
             <p>{{ article.content }}</p>
             <div v-for="(tag, index) in article.tags" :key="index">
-              <button class="btn btn-primary">{{ tag }}</button>
+              <router-link :to="{name: 'search', query: { tag: tag }}" class="btn btn-primary">{{ tag }}</router-link>
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@
       </div>
       <div class="share_post"> <a class="facebook" href="#"><i class="fa fa-facebook"></i>Facebook</a> <a class="twitter" href="#"><i class="fa fa-twitter"></i>Twitter</a> <a class="googleplus" href="#"><i class="fa fa-google-plus"></i>Google+</a>
         <a class="linkedin" href="#"><i class="fa fa-linkedin"></i>LinkedIn</a> <a class="stumbleupon" href="#"><i class="fa fa-stumbleupon"></i>StumbleUpon</a> <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>Pinterest</a> </div>
-      <div v-if="user">
+      <div v-if="user!= null">
         <div class="comment_encourage" v-if="article.comments.length === 0">
           <p><b> Be the first person commeting on this article </b></p>
         </div>
@@ -56,33 +56,18 @@
           </div>
         </div>
       </div>
+      <div v-else>
+        <h3>Please <router-link :to="{ name : 'login'}">login</router-link> to comment.</h3>
+      </div>
       <div class="similar_post">
         <h2>Similar Post You May Like <i class="fa fa-thumbs-o-up"></i></h2>
         <ul class="small_catg similar_nav wow fadeInDown animated">
-          <li>
+          <li v-for="(related, index) in article.relateds" :key="related.slug" v-if="index < 3">
             <div class="media wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
-              <a class="media-left related-img" href="#"><img src="../assets/images/112x112.jpg" alt=""></a>
+              <router-link :to="{ name: 'article', params: { article: article.slug }}" class="media-left related-img"><img :src="related.image" width="112" height="112" alt=""></router-link>
               <div class="media-body">
-                <h4 class="media-heading"><a href="#">Duis condimentum nunc pretium lobortis </a></h4>
-                <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
-              <a class="media-left related-img" href="#"><img src="../assets/images/112x112.jpg" alt=""></a>
-              <div class="media-body">
-                <h4 class="media-heading"><a href="#">Duis condimentum nunc pretium lobortis </a></h4>
-                <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
-              <a class="media-left related-img" href="#"><img src="../assets/images/112x112.jpg" alt=""></a>
-              <div class="media-body">
-                <h4 class="media-heading"><a href="#">Duis condimentum nunc pretium lobortis </a></h4>
-                <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra </p>
+                <h4 class="media-heading"><router-link :to="{ name: 'article', params: { article: related.slug }}">{{ related.title}}</router-link></h4>
+                <p v-html="related.short_intro">{{ related.short_intro }}</p>
               </div>
             </div>
           </li>

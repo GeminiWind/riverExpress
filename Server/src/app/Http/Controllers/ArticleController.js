@@ -174,7 +174,13 @@ const show = async (req, res) => {
       article.comments = await Comment.find({
         article: article._id,
       }).populate('user').sort('-created_at');
-
+      // attach related articles
+      article.relateds = await Article.find({
+        $or: [
+          { category: article.category },
+          { author: article.author.slug }
+        ]
+      })
       res.ok(article);
     }
   } catch (error) {

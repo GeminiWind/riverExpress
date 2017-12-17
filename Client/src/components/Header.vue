@@ -19,10 +19,10 @@
             </div>
             <div class="header_bottom">
               <div class="header_bottom_left">
-                <a class="logo" href="index.html">river
+                <router-link :to="{name: 'home'}" class="logo">river
                   <strong>Express</strong>
                   <span>Daily Express For You</span>
-                </a>
+                </router-link>
               </div>
             </div>
           </div>
