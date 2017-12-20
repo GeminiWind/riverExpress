@@ -12,7 +12,7 @@
                 <li class="active"><a href="#">{{ $route.params.category }}</a></li>
               </ol>
             </div>
-            <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <span class="title_text">Latest Updates</span> </h2>
+            <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <span class="title_text">{{ $route.params.category }}</span> </h2>
             <paginate name="articles" :list="articles" :per="4">
               <li v-for="article in paginated('articles')" :key="article.slug">
                 <div class="business_category_left wow fadeInDown">
@@ -23,7 +23,6 @@
                       </div>
                       <h2 class="catg_titile">
                         <router-link :to="{ name: 'article', params: { article: article.slug }}">{{ article.title }}</router-link>
-                        </a>
                       </h2>
                       <div class="comments_box"> <span class="meta_date">{{ article.created_at | moment("ddd,hA")}}</span> <span class="meta_comment"><router-link :to="{ name: 'article', params: { article: article.slug }}">{{ article.comments.length }} Comments</router-link></span><span class="meta_more"><router-link :to="{ name: 'article', params: { article: article.slug }}">Read More...</router-link></span> </div>
                       <p>{{ article.short_intro }}</p>

@@ -5,24 +5,15 @@
         <div class="col-lg-6 col-md-6 col-sm6">
           <slick ref="slick" :options="slickOptions">
             <div class="single_iteam" v-for="popular in populars" :key="popular.slug"><img :src="popular.image" alt="">
-              <h2><router-link :to="{ name: 'article', params: { article: popular.slug }}" class="slider_tittle">{{ popular.title }}</router-link></h2>
+              <h2><router-link :to="{ name: 'article', params: { article: popular.slug }}" class="slider_tittle">{{ popular.title | substring(93) }}</router-link></h2>
             </div>
           </slick>
         </div>
         <div class="col-lg-6 col-md-6 col-sm6">
           <div class="content_top_right">
             <ul class="featured_nav wow fadeInDown">
-              <li><img src="../assets/images/300x215x1.jpg" alt="">
-                <div class="title_caption"><a href="pages/single.html">Sed luctus semper odio aliquam rhoncus</a></div>
-              </li>
-              <li><img src="../assets/images/300x215x2.jpg" alt="">
-                <div class="title_caption"><a href="pages/single.html">Sed luctus semper odio aliquam rhoncus</a></div>
-              </li>
-              <li><img src="../assets/images/300x215x3.jpg" alt="">
-                <div class="title_caption"><a href="pages/single.html">Sed luctus semper odio aliquam rhoncus</a></div>
-              </li>
-              <li><img src="../assets/images/300x215x4.jpg" alt="">
-                <div class="title_caption"><a href="pages/single.html">Sed luctus semper odio aliquam rhoncus</a></div>
+              <li v-for="(politics, index) in politicses" :key="politics.slug" v-if="index<4"><img :src="politics.image" alt="">
+                <div class="title_caption"><router-link :to="{ name: 'article', params: { article: politics.slug }}">{{ politics.title | substring(93) }}</router-link></div>
               </li>
             </ul>
           </div>
@@ -33,19 +24,13 @@
       <div class="col-lg-3 col-md-3 col-sm-3">
         <div class="content_middle_leftbar">
           <div class="single_category wow fadeInDown">
-            <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a href="#" class="title_text">category1</a> </h2>
+            <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <router-link :to="{ name: 'category', params: { category: 'Lifestyle' } }" class="title_text">Lifestyle</router-link> </h2>
             <ul class="catg1_nav">
-              <li>
+              <li v-for="(lifestyle, index) in lifestyles" :key="lifestyle.slug" v-if="index <2">
                 <div class="catgimg_container">
-                  <a href="pages/single.html" class="catg1_img"><img alt="" src="../assets/images/292x150x1.jpg"></a>
+                  <router-link :to="{ name: 'article', params: { article: lifestyle.slug }}" class="catg1_img"><img alt="" :src="lifestyle.image"></router-link>
                 </div>
-                <h3 class="post_titile"><a href="pages/single.html">Vestibulum ut est augue, in varius</a></h3>
-              </li>
-              <li>
-                <div class="catgimg_container">
-                  <a href="pages/single.html" class="catg1_img"><img alt="" src="../assets/images/292x150x2.jpg"></a>
-                </div>
-                <h3 class="post_titile"><a href="pages/single.html">Vestibulum ut est augue, in varius</a></h3>
+                <h3 class="post_titile"><router-link :to="{ name: 'article', params: { article: lifestyle.slug }}">{{ lifestyle.title | substring(93) }}</router-link></h3>
               </li>
             </ul>
           </div>
@@ -54,20 +39,10 @@
       <div class="col-lg-6 col-md-6 col-sm-6">
         <div class="content_middle_middle">
           <slick ref="slick" :options="slick2">
-            <div class="single_featured_slide">
-              <a href="pages/single.html"><img src="../assets/images/567x330x1.jpg" alt=""></a>
-              <h2><a href="pages/single.html">Praesent vitae quam vitae arcu posuer 1</a></h2>
-              <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra urna. Morbi dui lectus, pharetra nec elementum eget, vulput...</p>
-            </div>
-            <div class="single_featured_slide">
-              <a href="pages/single.html"><img src="../assets/images/567x330x2.jpg" alt=""></a>
-              <h2><a href="#">Praesent vitae quam vitae arcu posuer 2</a></h2>
-              <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra urna. Morbi dui lectus, pharetra nec elementum eget, vulput...</p>
-            </div>
-            <div class="single_featured_slide">
-              <a href="pages/single.html"><img src="../assets/images/567x330x3.jpg" alt=""></a>
-              <h2><a href="#">Praesent vitae quam vitae arcu posuer 3</a></h2>
-              <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra urna. Morbi dui lectus, pharetra nec elementum eget, vulput...</p>
+            <div class="single_featured_slide" v-for="popular in populars" :key="popular.slug">
+              <router-link :to="{ name: 'article', params: { article: popular.slug }}"><img :src="popular.image" alt=""></router-link>
+              <h2><router-link :to="{ name: 'article', params: { article: popular.slug }}">{{ popular.title }}</router-link></h2>
+              <p v-html="popular.short_intro">{{ popular.short_intro }}</p>
             </div>
           </slick>
         </div>
@@ -75,19 +50,13 @@
       <div class="col-lg-3 col-md-3 col-sm-3">
         <div class="content_middle_rightbar">
           <div class="single_category wow fadeInDown">
-            <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a href="#" class="title_text">category2</a> </h2>
+            <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <router-link :to="{ name: 'category', params: { category: 'Travel' } }" class="title_text">Travel</router-link> </h2>
             <ul class="catg1_nav">
-              <li>
+              <li v-for="(travel, index) in travels" :key="travel.slug" v-if="index <2">
                 <div class="catgimg_container">
-                  <a href="pages/single.html" class="catg1_img"><img alt="" src="../assets/images/292x150x1.jpg"></a>
+                  <router-link :to="{ name: 'article', params: { article: travel.slug }}" class="catg1_img"><img alt="" :src="travel.image"></router-link>
                 </div>
-                <h3 class="post_titile"><a href="pages/single.html">Vestibulum ut est augue, in varius</a></h3>
-              </li>
-              <li>
-                <div class="catgimg_container">
-                  <a href="pages/single.html" class="catg1_img"><img alt="" src="../assets/images/292x150x2.jpg"></a>
-                </div>
-                <h3 class="post_titile"><a href="pages/single.html">Vestibulum ut est augue, in varius</a></h3>
+                <h3 class="post_titile"><router-link :to="{ name: 'article', params: { article: travel.slug }}">{{ travel.title | substring(93) }}</router-link></h3>
               </li>
             </ul>
           </div>
@@ -98,55 +67,45 @@
       <div class="col-lg-8 col-md-8">
         <div class="content_bottom_left">
           <div class="single_category wow fadeInDown">
-            <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a class="title_text" href="#">Business</a> </h2>
+            <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <router-link :to="{ name: 'category', params: { category: 'Bussiness' } }" class="title_text">Business</router-link> </h2>
             <div class="business_category_left wow fadeInDown">
               <ul class="fashion_catgnav">
-                <li>
-                  <div class="catgimg2_container">
-                    <a href="pages/single.html"><img alt="" src="../assets/images/390x240x1.jpg"></a>
-                  </div>
-                  <h2 class="catg_titile"><a href="pages/single.html">Aenean mollis metus sit amet ligula adipiscing</a></h2>
-                  <div class="comments_box"> <span class="meta_date">14/12/2045</span> <span class="meta_comment"><a href="#">No Comments</a></span> <span class="meta_more"><a  href="#">Read More...</a></span> </div>
-                  <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla...</p>
-                </li>
+                 <li>
+                    <div class="catgimg2_container">
+                      <router-link :to="{ name: 'article', params: { article: bussinesses[0].slug }}"><img alt="" :src="bussinesses[0].image"></router-link>
+                    </div>
+                    <h2 class="catg_titile">
+                      <router-link :to="{ name: 'article', params: { article: bussinesses[0].slug }}">{{ bussinesses[0].title }}</router-link>
+                    </h2>
+                    <div class="comments_box"> <span class="meta_date">{{ bussinesses[0].created_at | moment("ddd, hA")}}</span> <span class="meta_comment"><router-link :to="{ name: 'article', params: { article: bussinesses[0].slug }}">{{ bussinesses[0].comments.length}} comments</router-link></span>                    <span class="meta_more"><router-link :to="{ name: 'article', params: { article: games[0].slug }}">Read More...</router-link></span> </div>
+                    <p v-html="bussinesses[0].short_intro">{{ bussinesses[0].short_intro | substring(93) }}</p>
+                  </li>
               </ul>
             </div>
             <div class="business_category_right wow fadeInDown">
               <ul class="small_catg">
-                <li>
-                  <div class="media wow fadeInDown">
-                    <a class="media-left" href="pages/single.html"><img src="../assets/images/112x112.jpg" alt="" width="112px" height="112px"></a>
-                    <div class="media-body">
-                      <h4 class="media-heading"><a href="pages/single.html">Duis condimentum nunc pretium lobortis </a></h4>
-                      <div class="comments_box"> <span class="meta_date">14/12/2045</span> <span class="meta_comment"><a href="#">No Comments</a></span> </div>
+                  <li v-for="(bussiness, index) in bussinesses" :key="bussiness.slug" v-if="index >0 && index <3">
+                    <div class="media">
+                      <router-link :to="{ name: 'article', params: { article: bussiness.slug }}" class="media-left">
+                        <img :src="bussiness.image" alt="" width="112" height="112">
+                      </router-link>
+                      <div class="media-body">
+                        <h4 class="media-heading">
+                          <router-link :to="{ name: 'article', params: { article: bussiness.slug }}">
+                            {{ bussiness.title | substring(93) }}
+                          </router-link>
+                        </h4>
+                        <div class="comments_box"> <span class="meta_date">{{ bussiness.created_at | moment("ddd,hA")}}</span> <span class="meta_comment"><router-link :to="{ name: 'article', params: { article: bussiness.slug }}">{{ bussiness.comments.length }} comments</router-link></span> </div>
+                      </div>
                     </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="media wow fadeInDown">
-                    <a class="media-left" href="#"><img src="../assets/images/112x112.jpg" alt=""></a>
-                    <div class="media-body">
-                      <h4 class="media-heading"><a href="#">Duis condimentum nunc pretium lobortis </a></h4>
-                      <div class="comments_box"> <span class="meta_date">14/12/2045</span> <span class="meta_comment"><a href="#">No Comments</a></span> </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="media wow fadeInDown">
-                    <a class="media-left" href="#"><img src="../assets/images/112x112.jpg" alt=""></a>
-                    <div class="media-body">
-                      <h4 class="media-heading"><a href="#">Duis condimentum nunc pretium lobortis </a></h4>
-                      <div class="comments_box"> <span class="meta_date">14/12/2045</span> <span class="meta_comment"><a href="#">No Comments</a></span> </div>
-                    </div>
-                  </div>
-                </li>
+                  </li>
               </ul>
             </div>
           </div>
           <div class="games_fashion_area">
             <div class="games_category">
               <div class="single_category">
-                <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a class="title_text" href="#">Games</a> </h2>
+                <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <router-link :to="{ name: 'category', params: { category: 'Game' } }" class="title_text">Game</router-link> </h2>
                 <ul class="fashion_catgnav wow fadeInDown">
                   <li>
                     <div class="catgimg2_container">
@@ -181,7 +140,7 @@
             <div class="fashion_category">
               <div class="single_category">
                 <div class="single_category wow fadeInDown">
-                  <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <router-link :to="{ name: 'category', params: { category: 'Fashion' } }"class="title_text">Fashion</router-link></h2>
+                  <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <router-link :to="{ name: 'category', params: { category: 'Fashion' } }" class="title_text">Fashion</router-link></h2>
                   <ul class="fashion_catgnav wow fadeInDown">
                     <li>
                       <div class="catgimg2_container">
@@ -272,6 +231,11 @@
         fashions: [],
         technologies: [],
         bussinesses: [],
+        lifestyles: [],
+        travels: [],
+        economies: [],
+        politicses: [],
+        recents: [],
         slickOptions: {
           slidesToShow: 4,
           infinite: true,
@@ -301,6 +265,11 @@
       this.fetchFashions();
       this.fetchTechnologies();
       this.fetchBussinesses();
+      this.fetchTravels();
+      this.fetchLifestyles();
+      this.fetchEconomies();
+      this.fetchPoliticses();
+      this.fetchRecents();
     },
     methods: {
       async fetchPopulars() {
@@ -330,6 +299,22 @@
       },
       async fetchBussinesses() {
         this.bussinesses = await this.fetchByCategory('Bussiness');
+      },
+      async fetchTravels() {
+        this.travels = await this.fetchByCategory('Travel');
+      },
+      async fetchLifestyles() {
+        this.lifestyles = await this.fetchByCategory('Lifestyle');
+      },
+      async fetchEconomies() {
+        this.economies = await this.fetchByCategory('Economy');
+      },
+      async fetchPoliticses() {
+        this.politicses = await this.fetchByCategory('Politics');
+      },
+      async fetchRecents() {
+          const { data } = await this.$http.get('/articles');
+          this.recents = data.data;
       },
       next() {
         this.$refs.slick.next();

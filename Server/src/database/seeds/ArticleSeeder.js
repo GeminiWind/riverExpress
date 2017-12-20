@@ -13,7 +13,7 @@ mongoose.Promise = global.Promise;
 
 const categories = ['Bussiness', 'Technology', 'Game', 'Fashion', 'Politics', 'Economy', 'Lifstyle', 'Travel'];
 
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 60; i++) {
   const article = new Article();
   article.title = faker.lorem.sentence();
   article.content = faker.lorem.paragraphs(4);

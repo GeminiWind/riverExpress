@@ -10,10 +10,14 @@
             <li><router-link to="/">Home</router-link></li>
             <li class="dropdown"> <a href="#" class="" data-toggle="dropdown" role="button" aria-expanded="false">Category</a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="pages/archive-main.html">Category</a></li>
-                <li><a href="pages/archive1.html">Archive 1</a></li>
-                <li><a href="pages/archive2.html">Archive 2</a></li>
-                <li><a href="pages/archive3.html">Archive 3</a></li>
+                <li><router-link :to="{ name: 'category', params: { category: 'Bussiness' } }">Bussiness</router-link></li>
+                <li><router-link :to="{ name: 'category', params: { category: 'Economy' } }">Economy</router-link></li>
+                <li><router-link :to="{ name: 'category', params: { category: 'Fashion' } }">Fashion</router-link></li>
+                <li><router-link :to="{ name: 'category', params: { category: 'Game' } }">Game</router-link></li>
+                <li><router-link :to="{ name: 'category', params: { category: 'Lifestyle' } }">Lifestyle</router-link></li>
+                <li><router-link :to="{ name: 'category', params: { category: 'Technology' } }">Technology</router-link></li>
+                <li><router-link :to="{ name: 'category', params: { category: 'Travel' } }">Travel</router-link></li>
+                <li><router-link :to="{ name: 'category', params: { category: 'Politics' } }">Politics</router-link></li>
               </ul>
             </li>
             <li><router-link to="/about">About</router-link></li>
