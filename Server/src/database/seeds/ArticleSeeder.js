@@ -2,10 +2,12 @@ import faker from 'faker';
 import mongoose from 'mongoose';
 import Article from '../../app/Models/Article';
 import { loadEnv } from '../../config/env';
+import chalk from 'chalk';
 
 faker.locale = 'en_US';
 
 loadEnv();
+
 mongoose.connect(process.env.MONGODB_URL, {
   useMongoClient: true,
 });
@@ -13,7 +15,9 @@ mongoose.Promise = global.Promise;
 
 const categories = ['Bussiness', 'Technology', 'Game', 'Fashion', 'Politics', 'Economy', 'Lifstyle', 'Travel'];
 
-for (let i = 0; i < 60; i++) {
+let promiseAritcleSeed = [];
+
+const createArticle = () => {
   const article = new Article();
   article.title = faker.lorem.sentence();
   article.content = faker.lorem.paragraphs(4);
@@ -27,8 +31,13 @@ for (let i = 0; i < 60; i++) {
     intro: faker.lorem.sentences(3),
   };
   article.popular = faker.random.boolean();
-  article.image = faker.image.imageUrl();
-  article.save()
-    .then()
-    .catch();
+  article.image = faker.image.image();
+  return article.save();
 }
+
+const createArticles = (numArticle = 60) => {
+  return Array.from({ length: numArticle }, createArticle);
+}
+
+const a = Promise.all(createArticles());
+console.log('%s Seed articles into database successfully', chalk.green('✓'));

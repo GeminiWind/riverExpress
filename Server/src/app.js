@@ -9,6 +9,7 @@ import { configurePassport } from './config/passport';
 import { initializeRoutes } from './router';
 import { loadEnv } from './config/env';
 import { customiseResponse } from './config/response';
+import chalk from 'chalk';
 
 // LOAD ENVIRONMENT VARIABLES
 loadEnv();
@@ -49,7 +50,8 @@ initializeRoutes(app, passport);
 // START APPLICATION
 app.listen(app.get('port'), () => {
   console.log(
-    'App is running at %s in %s mode',
+    '%s App is running at %s in %s mode',
+    chalk.green('✓'),
     process.env.APP_URL,
     process.env.NODE_ENV,
   );

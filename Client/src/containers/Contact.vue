@@ -1,42 +1,26 @@
 <template>
-  <div id="app">
-    <div id="preloader">
-      <div id="status">&nbsp;</div>
-    </div>
-    <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
-    <div class="container">
-      <header id="header">
-        <div class="row">
-          <div class="col-lg-12 col-md-12">
-            <div class="header_top">
-              <div class="header_top_left">
-                <ul class="top_nav">
-                  <li><a href="../index.html">Home</a></li>
-                  <li><a href="page.html">About</a></li>
-                  <li><a href="contact.html">Contact</a></li>
-                  <li><a href="404.html">Error Page</a></li>
-                </ul>
-              </div>
-              <div class="header_top_right">
-                <form action="#" class="search_form">
-                  <input type="text" placeholder="Text to Search">
-                  <input type="submit" value="">
+  <section id="ContactContent">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="contact_area">
+            <h1>Contacts</h1>
+            <p>Vestibulum id nisl a neque malesuada hendrerit. Mauris ut porttitor nunc, ut volutpat nisl. Nam ullamcorper ultricies metus vel ornare. Vivamus tincidunt erat in mi accumsan, a sollicitudin risus vestibulum. Nam dignissim purus vitae nisl adipiscing ultricies. Pellentesque in porttitor tellus. Integer fermentum in sem eu tempus. In eu metus vitae nibh laoreet sollicitudin et ac lectus. Curabitur blandit velit elementum augue elementum scelerisque.</p>
+            <div class="contact_bottom">
+              <div class="contact_us wow fadeInRightBig">
+                <h2>Contact Us</h2>
+                <form action="#" class="contact_form">
+                  <input class="form-control" type="text" placeholder="Name(required)">
+                  <input class="form-control" type="email" placeholder="E-mail(required)">
+                  <input class="form-control" type="text" placeholder="Subject">
+                  <textarea class="form-control" cols="30" rows="10" placeholder="Message(required)"></textarea>
+                  <input type="submit" value="Send">
                 </form>
-              </div>
-            </div>
-            <div class="header_bottom">
-              <div class="header_bottom_left"><a class="logo" href="../index.html">mag<strong>Express</strong> <span>A Pro Magazine Template</span></a></div>
-              <div class="header_bottom_right">
-                <a href="#"><img src="../assets/images/addbanner_728x90_V1.jpg" alt=""></a>
               </div>
             </div>
           </div>
         </div>
-      </header>
-      <Navigation></Navigation>
-    </div>
-    <MyFooter></MyFooter>
-  </div>
+      </div>
+    </section>
 </template>
 
 <script>

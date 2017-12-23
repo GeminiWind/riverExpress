@@ -23,23 +23,15 @@
           </div>
         </div>
       </div>
-      <div class="post_pagination">
-        <div class="prev"> <a class="angle_left" href="#"><i class="fa fa-angle-double-left"></i></a>
-          <div class="pagincontent"> <span>Previous Post</span> <a href="#">Aliquam quam orci in molestie a tempor nec</a> </div>
-        </div>
-        <div class="next">
-          <div class="pagincontent"> <span>Next Post</span> <a href="#">Aliquam quam orci in molestie a tempor nec</a> </div>
-          <a class="angle_right" href="#"><i class="fa fa-angle-double-right"></i></a> </div>
-      </div>
       <div class="share_post"> <a class="facebook" href="#"><i class="fa fa-facebook"></i>Facebook</a> <a class="twitter" href="#"><i class="fa fa-twitter"></i>Twitter</a> <a class="googleplus" href="#"><i class="fa fa-google-plus"></i>Google+</a>
         <a class="linkedin" href="#"><i class="fa fa-linkedin"></i>LinkedIn</a> <a class="stumbleupon" href="#"><i class="fa fa-stumbleupon"></i>StumbleUpon</a> <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>Pinterest</a> </div>
       <div v-if="user!= null">
         <div class="comment_encourage" v-if="article.comments.length === 0">
           <p><b> Be the first person commeting on this article </b></p>
         </div>
-        <vue-editor v-model="comment"></vue-editor>
-        <div class="pull-left"> You are commenting as
-          <vue-letter-avatar name=user.profile.first_name size='25'></vue-letter-avatar>
+        <vue-editor v-model="comment" :editorToolbar="customToolbar"></vue-editor>
+        <div class="pull-left"> You are commenting as {{ user.profile.first_name }} {{ user.profile.last_name }}
+          <vue-letter-avatar :name="user.profile.first_name" size='25'></vue-letter-avatar>
         </div>
         <button class="btn btn-primary pull-right" @click="sendComment">Send</button>
         <hr/>
@@ -50,7 +42,7 @@
               <vue-letter-avatar name="comment.user.profile.first_name" size='25'></vue-letter-avatar>
             </div>
             <div class="col-md-9" v-html="comment.content">
-              <p>{{ comment.content }}</p>
+              <p v-html="comment.content">{{ comment.content }}</p>
               <p class="pull-right">{{ comment.created_at | moment("Do ddd, hA")}}</p>
             </div>
           </div>
@@ -97,7 +89,14 @@
     data() {
       return {
         article: {},
-        comment: ''
+        comment: '',
+        customToolbar: [
+          [{ 'font': [] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          ['align', { 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+          [{ 'align': [] }],
+        ]
       }
     },
     created() {

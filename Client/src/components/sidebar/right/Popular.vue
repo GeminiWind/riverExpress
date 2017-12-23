@@ -25,7 +25,7 @@
                 <ul class="small_catg popular_catg">
                   <li v-for="recentComment in recentComments" :key="recentComment.slug">
                     <div class="media wow fadeInDown">
-                      <router-link :to="{ name: 'article', params: { article: recentComment.slug }}"><img :src="recentComment.image" width="112" height="112" alt=""></router-link>
+                      <router-link :to="{ name: 'article', params: { article: recentComment.slug }}" class="media-left"><img :src="recentComment.image" width="112" height="112" alt=""></router-link>
                       <div class="media-body">
                         <h4 class="media-heading">
                           <router-link :to="{ name: 'article', params: { article: recentComment.slug }}">{{ recentComment.title }} </router-link>
@@ -59,7 +59,7 @@ export default {
       },
       async fetchRecentComments() {
         const { data } = await this.$http.get('/articles/comments/recent');
-        this.recentComments = data.data.slice(0,3);
+        this.recentComments = data.data.filter(comment => comment !== null).slice(0,3);
       }
   }
   

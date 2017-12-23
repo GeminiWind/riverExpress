@@ -71,6 +71,7 @@ const filterByAuthor = (articles, author) => {
     minMatchCharLength: 4,
     keys: [
       "author.slug",
+      "author.name",
     ]
   };
 

@@ -5,16 +5,12 @@
             <div class="header_top">
               <div class="header_top_right">
                   <div class="user-info" v-if="user">
-                      Welcome {{ user.profile.first_name }}
+                      <h3>Welcome<strong> {{ user.profile.first_name }}</strong></h3>
                       <a href='#' @click="logout">Logout</a>
                   </div>
                   <div class="login-guess" v-else>
                     <router-link :to="{ name: 'login'}">Login</router-link>
                   </div>
-                <form @submit.prevent="searchArticle" class="search_form">
-                  <input type="text" placeholder="Type article to search" v-model="search">
-                  <input type="submit" value="">
-                </form>
               </div>
             </div>
             <div class="header_bottom">
@@ -33,11 +29,6 @@
 <script>
     import { mapGetters } from 'vuex'
     export default {
-         data(){
-            return {
-                search: '',
-            }
-        },
         computed: mapGetters({
             user: 'auth/user',
         }),
@@ -50,9 +41,5 @@
                 : this.$router.push('/')
           }
         },
-        searchArticle() {
-          // direct to search
-          // this.$router.push({})
-        }
     }
 </script>
